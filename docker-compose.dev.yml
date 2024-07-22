@@ -1,0 +1,39 @@
+version: '3.2'
+services:
+  # authapp-db-dev:
+  #   image: postgres:15.3-alpine
+  #   container_name: authapp-db-dev
+  #   networks:
+  #     - default
+  #   volumes:
+  #     - ./postgres_data:/var/lib/postgresql/data/
+  #     - /etc/localtime:/etc/localtime:ro
+  #     #- ./my_db_scripts:/docker-entrypoint-initdb.d:ro
+  #   env_file:
+  #     - environment/dev.env
+  #   restart: unless-stopped
+  #   healthcheck:
+  #     test: "exit 0"
+
+  authapp-app-dev:
+    build: .
+    container_name: authapp-app-dev
+    networks:
+      - default
+    working_dir: /app
+    ports:
+      - "8002:80"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - .backend/app:/app:rw
+    env_file:
+      - backend/environments/dev.env
+    command: python manage.py runserver 0.0.0.0:80
+    restart: unless-stopped
+    # depends_on:
+      # authapp-db-dev:
+      #   condition: service_healthy
+
+networks:
+  default:
+    name: auth-app-dev

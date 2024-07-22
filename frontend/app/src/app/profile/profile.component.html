@@ -1,0 +1,56 @@
+<h2 class="mb-4">Профиль</h2>
+
+
+<div class="mb-3 row g-3 align-items-center">
+    <div class="col-2">
+        <span><b>Username</b></span>
+    </div>
+    <div class="col">
+        <span>{{ currentUser?.username }}</span>
+    </div>
+</div>
+<div class="mb-3 row g-3 align-items-center">
+    <div class="col-2">
+        <span><b>Имя</b></span>
+    </div>
+    <div class="col">
+        <span>{{ currentUser?.first_name }}</span>
+    </div>
+</div>
+<div class="mb-3 row g-3 align-items-center">
+    <div class="col-2">
+        <span><b>Фамилия</b></span>
+    </div>
+    <div class="col">
+        <span>{{ currentUser?.last_name }}</span>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-between">
+    <div>
+        <p-button 
+            pRipple 
+            label="Редактировать"
+            routerLink="edit" 
+            routerLinkActive="active"
+        />
+        <p-button 
+            label="Изменить пароль"
+            class="ms-3"
+            [link]="true"
+            (click)="changePasswordDialog()"
+        />
+    </div>
+    <div>
+        <p-button 
+            label="Удалить аккаунт"
+            severity="danger"
+            outlined="true"
+            (click)="deleteUserConfirmDialog($event)"
+        />
+    </div>
+</div>
+
+<p-messages />
+<p-confirmDialog />

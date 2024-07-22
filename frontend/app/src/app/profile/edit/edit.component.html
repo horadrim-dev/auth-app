@@ -1,0 +1,76 @@
+<h3 class="mb-5">Редактирование профиля</h3>
+
+<form  [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="mb-4">
+            <h5 class="mb-3">Имя пользователя</h5>
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <input 
+                    pInputText 
+                    formControlName="username" 
+                    placeholder="Имя пользователя" 
+                    [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.get('username')?.errors }" 
+                />
+            </p-inputGroup>
+            <small class="p-error block" *ngIf="submitted && f.get('username')?.hasError('required') ">
+                Имя пользователя не может быть пустым
+            </small>
+            <small class="p-error block" *ngIf="submitted && f.get('username')?.hasError('minlength') ">
+                Слишком короткое имя пользователя. (минимум 4 символа)
+            </small>
+        </div>
+
+        <div class="mb-4">
+            <span class="p-float-label"> 
+                <input 
+                    pInputText 
+                    type="text" 
+                    formControlName="first_name" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.get('first_name')?.errors }" 
+                />
+                <label for="first_name">Имя</label>
+            </span>
+            <small class="p-error block" *ngIf="submitted && f.get('first_name')?.errors ">
+                Поле заполнено некорректно
+            </small>
+        </div>
+        
+        <div class="mb-4">
+            <span class="p-float-label"> 
+                <input 
+                    pInputText 
+                    type="text" 
+                    formControlName="last_name" 
+                    class="form-control" 
+                    [ngClass]="{ 'is-invalid': submitted && f.get('last_name')?.errors }" 
+                />
+                <label for="last_name">Фамилия</label>
+            </span>
+            <small class="p-error block" *ngIf="submitted && f.get('last_name')?.errors ">
+                Поле заполнено некорректно
+            </small>
+        </div>
+
+        <p-messages />
+
+        <div class="form-group mt-3">
+            <button 
+                pButton 
+                class="me-3"
+                >
+                Сохранить
+            </button>
+            <button 
+                pButton 
+                [outlined]="true" 
+                severity="secondary"
+                (click)="back()"
+                >
+                Назад
+            </button>
+        </div>
+</form>

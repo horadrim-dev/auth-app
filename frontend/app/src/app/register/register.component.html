@@ -1,0 +1,135 @@
+<h3 class="mb-5">Регистрация</h3>
+
+<div class="mb-5">
+    <p-steps [model]="stepItems" [(activeIndex)]="stepIndex" ></p-steps>
+</div>
+
+<!-- STEP #1 -->
+<div *ngIf="stepIndex==0">
+
+    <form [formGroup]="authDataForm" (ngSubmit)="onSubmitAuthDataForm()">
+
+        <div class="my-4">
+            <h5 class="mb-3">Выберите имя пользователя</h5>
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-user"></i>
+                </p-inputGroupAddon>
+                <input 
+                    pInputText 
+                    formControlName="username" 
+                    placeholder="Имя пользователя" 
+                    [ngClass]="{ 'ng-invalid ng-dirty': submitted && authDataForm.get('username')?.errors }" 
+                />
+            </p-inputGroup>
+            <small class="p-error block" *ngIf="submitted && authDataForm.get('username')?.hasError('required') ">
+                Имя пользователя не может быть пустым
+            </small>
+            <small class="p-error block" *ngIf="submitted && authDataForm.get('username')?.hasError('minlength') ">
+                Слишком короткое имя пользователя
+            </small>
+            <div class="clearfix"></div>
+            <small>
+                Не менее 4 символов.
+            </small>
+        </div>
+        <div class="mb-2">
+            <h5 class="mb-3">Придумайте пароль</h5>
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-lock"></i>
+                </p-inputGroupAddon>
+                <input 
+                    pPassword 
+                    type="password" 
+                    formControlName="password" 
+                    placeholder="Пароль"
+                    [feedback]="false" 
+                    [ngClass]="{ 'ng-invalid ng-dirty': submitted && (authDataForm.get('password')?.errors || authDataForm.hasError('requireConfirmPassword')) }" 
+                />
+            </p-inputGroup>
+        </div>
+        <div class="mb-2">
+            <p-inputGroup>
+                <p-inputGroupAddon>
+                    <i class="pi pi-lock"></i>
+                </p-inputGroupAddon>
+                <input 
+                    pPassword 
+                    type="password" 
+                    formControlName="confirmPassword" 
+                    placeholder="Повторите пароль"
+                    [feedback]="false" 
+                    [ngClass]="{ 'ng-invalid ng-dirty': submitted && (authDataForm.get('confirmPassword')?.errors || authDataForm.hasError('requireConfirmPassword')) }" 
+                />
+            </p-inputGroup>
+            <small class="p-error block" *ngIf="submitted && authDataForm.hasError('requireConfirmPassword')">
+                Пароли не совпадают
+            </small>
+            <small class="p-error block" *ngIf="submitted && authDataForm.get('password')?.hasError('required') ">
+                Нельзя использовать пустой пароль
+            </small>
+            <small class="p-error block" *ngIf="submitted && authDataForm.get('password')?.hasError('minlength') ">
+                Слишком короткий пароль
+            </small>
+            <div class="clearfix"></div>
+            <small>
+                Не менее 8 символов. Только буквы, цифры и спец.символы.
+            </small>
+        </div>
+
+        <p-messages key="step1"/>
+
+        <div class="d-flex justify-content-end mt-3">
+            <p-button 
+                type="submit"
+                label="Зарегистрировать"
+                [loading]="loading"
+            />
+        </div>
+    </form>
+</div>
+
+
+<!-- STEP #2 -->
+<div *ngIf="stepIndex==1">
+
+    <h5 class="my-5">Теперь заполните данные профиля (необязательно). </h5>
+
+    <form [formGroup]="userDataForm" (ngSubmit)="onSubmitUserDataForm()">
+        <div class="mb-4">
+            <span class="p-float-label"> 
+                <input 
+                pInputText 
+                formControlName="first_name" 
+                class="form-control" 
+                [ngClass]="{ 'ng-invalid ng-dirty': submitted && userDataForm.get('first_name')?.errors }" 
+                />
+                <label for="first_name">Имя</label>
+            </span> 
+        </div>
+
+        <div class="mb-4">
+            <span class="p-float-label"> 
+                <input 
+                pInputText 
+                formControlName="last_name" 
+                class="form-control" 
+                [ngClass]="{ 'ng-invalid ng-dirty': submitted && userDataForm.get('last_name')?.errors }" 
+                />
+                <label for="last_name">Фамилия</label>
+            </span> 
+        </div>
+
+        <p-messages key="step2"/>
+
+        <div class="d-flex justify-content-end mt-5">
+            <p-button 
+                type="submit"
+                severity="success"
+                [loading]="loading"
+                label="Завершить регистрацию"
+            />
+        </div>
+    </form>
+</div>

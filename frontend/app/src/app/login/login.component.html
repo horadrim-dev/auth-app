@@ -1,0 +1,45 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+    <div class="mb-4">
+      <p-inputGroup>
+          <p-inputGroupAddon>
+              <i class="pi pi-user"></i>
+          </p-inputGroupAddon>
+          <input 
+              pInputText 
+              formControlName="username" 
+              placeholder="Имя пользователя" 
+              [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.get('username')?.errors }" 
+          />
+      </p-inputGroup>
+      <small class="p-error block" *ngIf="submitted && f.get('username')?.errors ">
+          Некорректное имя пользователя
+      </small>
+    </div>
+
+    <div class="mb-4">
+      <p-inputGroup>
+          <p-inputGroupAddon>
+              <i class="pi pi-lock"></i>
+          </p-inputGroupAddon>
+          <input 
+              pPassword 
+              type="password" 
+              formControlName="password" 
+              placeholder="Пароль"
+              [feedback]="false" 
+              [ngClass]="{ 'ng-invalid ng-dirty': submitted && f.get('password')?.errors }" 
+          />
+      </p-inputGroup>
+      <small class="p-error block" *ngIf="submitted && f.get('password')?.errors ">
+          Некорректный пароль
+      </small>
+    </div>
+
+    <p-messages />
+
+    <div class="mb-3">
+        <button pButton [loading]="loading" class="w-100">Войти</button>
+    </div>
+
+</form>
