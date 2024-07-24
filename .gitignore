@@ -1,9 +1,8 @@
 frontend/nodeenv-v22.4.0
 frontend/app/node_modules
 backend/venv
-backend/environments/dev.env
+backend/environments/prod.env
 *.pyc
 frontend/app/src/environments/environment.prod.ts
-frontend/app/src/environments/environment.ts
 backend/app/staticfiles
 backend/app/mediafiles
