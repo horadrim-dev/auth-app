@@ -5,3 +5,5 @@ backend/environments/dev.env
 *.pyc
 frontend/app/src/environments/environment.prod.ts
 frontend/app/src/environments/environment.ts
+backend/app/staticfiles
+backend/app/mediafiles

@@ -7,6 +7,7 @@ django-environ==0.11.2
 django-filter==22.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
+gunicorn==22.0.0
 importlib-metadata==5.1.0
 Markdown==3.4.1
 nodeenv==1.9.1

@@ -41,6 +41,8 @@ ALLOWED_HOSTS = env('ALLOWED_HOSTS')
 
 META_SITE_PROTOCOL = env('SITE_PROTOCOL')
 
+CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,8 +139,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = 'mediafiles/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -193,8 +203,5 @@ SIMPLE_JWT = {
 }
 
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",
-]
 
 AUTH_USER_MODEL = "users.AppUser"
